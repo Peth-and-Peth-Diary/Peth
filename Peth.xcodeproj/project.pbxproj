@@ -11,6 +11,7 @@
 		DD430ACE2A7FAB96003A3B9C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD430ACD2A7FAB96003A3B9C /* ContentView.swift */; };
 		DD430AD02A7FAB98003A3B9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD430ACF2A7FAB98003A3B9C /* Assets.xcassets */; };
 		DD430AD32A7FAB98003A3B9C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD430AD22A7FAB98003A3B9C /* Preview Assets.xcassets */; };
+		DD430ADB2A7FE2BB003A3B9C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD430ADA2A7FE2BB003A3B9C /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		DD430ACF2A7FAB98003A3B9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD430AD22A7FAB98003A3B9C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DD430AD92A7FAC56003A3B9C /* Peth.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Peth.entitlements; sourceTree = "<group>"; };
+		DD430ADA2A7FE2BB003A3B9C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			children = (
 				DD430AD92A7FAC56003A3B9C /* Peth.entitlements */,
 				DD430ACB2A7FAB96003A3B9C /* PethApp.swift */,
+				DD430ADA2A7FE2BB003A3B9C /* LoginView.swift */,
 				DD430ACD2A7FAB96003A3B9C /* ContentView.swift */,
 				DD430ACF2A7FAB98003A3B9C /* Assets.xcassets */,
 				DD430AD12A7FAB98003A3B9C /* Preview Content */,
@@ -139,6 +142,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD430ADB2A7FE2BB003A3B9C /* LoginView.swift in Sources */,
 				DD430ACE2A7FAB96003A3B9C /* ContentView.swift in Sources */,
 				DD430ACC2A7FAB96003A3B9C /* PethApp.swift in Sources */,
 			);

@@ -9,9 +9,16 @@ import SwiftUI
 
 @main
 struct PethApp: App {
+    @AppStorage("authID") var authID: String = ""
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if (authID == "") {
+                LoginView()
+            }
+            else {
+                ContentView()
+            }
         }
     }
 }
