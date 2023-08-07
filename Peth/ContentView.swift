@@ -17,25 +17,8 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView{
-//            ScrollView{
-//                LazyVStack{
             List{
                 ForEach(1...100,  id: \.self) {_ in
-                    //                    NavigationLink {
-                    //                        Text("oke")
-                    //                    } label: {
-                    //                        Image(systemName: "square.and.pencil.circle.fill")
-                    //                            .resizable()
-                    //                            .scaledToFill()
-                    //                            .frame(width: 40, height: 25)
-                    //                            .clipShape(
-                    //                                RoundedRectangle(cornerRadius: 5)
-                    //                            )
-                    //                            .overlay(
-                    //                                RoundedRectangle(cornerRadius: 5)
-                    //                                    .stroke(.black, lineWidth: 1)
-                    //                            )
-                    
                     VStack(alignment: .leading) {
                         Text(username)
                             .font(.headline)
@@ -44,51 +27,46 @@ struct ContentView: View {
                             .multilineTextAlignment(.leading)
                     }
                 }
-                        //                    }
-//                    }
-//                    .padding()
-//                }
             }
             .navigationTitle("Peth's Timeline")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        HStack {
-                            Image(systemName: "person.crop.circle")
-                                .onTapGesture {
-                                    isShowingProfileModal = true
-                                }
-                            //                            .resizable()
-                            //                            .frame(width: 24, height: 24)
-                        }
-                    }
-                    ToolbarItem(placement: .bottomBar) {
-                        Image(systemName: "square.and.pencil")
-                            .padding(.trailing)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    HStack {
+                        Image(systemName: "person.crop.circle")
                             .onTapGesture {
-                                isShowingEditorModal = true
+                                isShowingProfileModal = true
                             }
-                        
                     }
+                }
+                ToolbarItem(placement: .bottomBar) {
+                    Image(systemName: "square.and.pencil")
+                        .padding(.trailing)
+                        .onTapGesture {
+                            isShowingEditorModal = true
+                        }
                     
                 }
-                .onAppear(){
-                    if (username == "") {
-                        isShowingInputUsernameModal = true
-                    }
+                
+            }
+            .sheet(isPresented: $isShowingProfileModal) {
+                LogoutButton(isLoggedIn: $isShowingProfileModal, logoutAction: clearUserData)
+            }
+            .sheet(isPresented: $isShowingEditorModal) {
+                TextView()
+            }
+            .sheet(isPresented: $isShowingInputUsernameModal) {
+                InputUsernameModal()
+                    .presentationDetents([.height(UIScreen.main.bounds.size.height / 2) , .medium, .large])
+                    .presentationDragIndicator(.automatic)
+                    .interactiveDismissDisabled()
+                
+            }
+            .onAppear(){
+                if (username == "") {
+                    isShowingInputUsernameModal = true
                 }
-                .sheet(isPresented: $isShowingProfileModal) {
-                    LogoutButton(isLoggedIn: $isShowingProfileModal, logoutAction: clearUserData)
-                }
-                .sheet(isPresented: $isShowingEditorModal) {
-                    TextView()
-                }
-                .sheet(isPresented: $isShowingInputUsernameModal) {
-                    InputUsernameModal()
-                        .presentationDetents([.height(UIScreen.main.bounds.size.height / 2) , .medium, .large])
-                        .presentationDragIndicator(.automatic)
-                        .interactiveDismissDisabled()
+            }
 
-                }
         }
         
     }

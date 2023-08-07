@@ -13,7 +13,6 @@ struct InputUsernameModal: View {
     
     @AppStorage("username") var username: String = ""
     
-    
     var body: some View {
         NavigationStack {
             VStack {
@@ -51,7 +50,9 @@ struct InputUsernameModal: View {
                         
                             .padding(.horizontal)
                     }
+                    .disabled(usernameInput == "")
                 }
+                
             }
             .toolbarBackground(Color(UIColor.systemGray6), for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
