@@ -11,7 +11,8 @@ import AuthenticationServices
 struct LoginView: View {
     @State private var fullName: String = ""
     @State private var userEmail: String = ""
-    @State private var isLoggedIn: Bool = false
+    
+    @AppStorage("isLoggedIn") var isLoggedIn: Bool = false
     @State var userID = ""
     @AppStorage("authID") var authID: String = ""
     
@@ -19,7 +20,6 @@ struct LoginView: View {
         VStack {
             if isLoggedIn {
                 ContentView()
-//                LogoutButton(isLoggedIn: $isLoggedIn, logoutAction: clearUserData)
             } else {
                 SignInWithAppleButton(.signIn) { request in
                     request.requestedScopes = [.fullName, .email]
@@ -61,11 +61,7 @@ struct LoginView: View {
                 }
                 .signInWithAppleButtonStyle(.whiteOutline)
                 .frame(width: 200, height: 50)
-            }
-            
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
+            }            
             Text(userID)
         }
         .padding()

@@ -15,6 +15,7 @@
 		DD430ADD2A806B3C003A3B9C /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD430ADC2A806B3C003A3B9C /* TextView.swift */; };
 		DD430AE02A806D5C003A3B9C /* RichTextKit in Frameworks */ = {isa = PBXBuildFile; productRef = DD430ADF2A806D5C003A3B9C /* RichTextKit */; };
 		DD430AE22A808612003A3B9C /* InputUsernameModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD430AE12A808612003A3B9C /* InputUsernameModal.swift */; };
+		DD430AE42A80A7D3003A3B9C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD430AE32A80A7D3003A3B9C /* ProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		DD430ADA2A7FE2BB003A3B9C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		DD430ADC2A806B3C003A3B9C /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		DD430AE12A808612003A3B9C /* InputUsernameModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputUsernameModal.swift; sourceTree = "<group>"; };
+		DD430AE32A80A7D3003A3B9C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				DD430ACB2A7FAB96003A3B9C /* PethApp.swift */,
 				DD430ADA2A7FE2BB003A3B9C /* LoginView.swift */,
 				DD430ACD2A7FAB96003A3B9C /* ContentView.swift */,
+				DD430AE32A80A7D3003A3B9C /* ProfileView.swift */,
 				DD430AE12A808612003A3B9C /* InputUsernameModal.swift */,
 				DD430ADC2A806B3C003A3B9C /* TextView.swift */,
 				DD430ACF2A7FAB98003A3B9C /* Assets.xcassets */,
@@ -160,6 +163,7 @@
 				DD430ADD2A806B3C003A3B9C /* TextView.swift in Sources */,
 				DD430AE22A808612003A3B9C /* InputUsernameModal.swift in Sources */,
 				DD430ACE2A7FAB96003A3B9C /* ContentView.swift in Sources */,
+				DD430AE42A80A7D3003A3B9C /* ProfileView.swift in Sources */,
 				DD430ACC2A7FAB96003A3B9C /* PethApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,14 +10,15 @@ import SwiftUI
 @main
 struct PethApp: App {
     @AppStorage("authID") var authID: String = ""
+    @AppStorage("isLoggedIn") var isLoggedIn: Bool = false
     
     var body: some Scene {
         WindowGroup {
-            if (authID == "") {
-                LoginView()
+            if (isLoggedIn) {
+                ContentView()
             }
             else {
-                ContentView()
+                LoginView()
             }
         }
     }

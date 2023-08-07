@@ -49,7 +49,7 @@ struct ContentView: View {
                 
             }
             .sheet(isPresented: $isShowingProfileModal) {
-                LogoutButton(isLoggedIn: $isShowingProfileModal, logoutAction: clearUserData)
+                ProfileView()
             }
             .sheet(isPresented: $isShowingEditorModal) {
                 TextView()
