@@ -18,50 +18,51 @@ struct LoginView: View {
     
     var body: some View {
         VStack {
-            if isLoggedIn {
-                ContentView()
-            } else {
-                SignInWithAppleButton(.signIn) { request in
-                    request.requestedScopes = [.fullName, .email]
-                } onCompletion: { result in
-                    switch result {
-                    case .success(let authResults):
-                        print("Authorisation successful")
-                        if let appleIDCredential = authResults.credential as? ASAuthorizationAppleIDCredential {
-                            // Handle successful login here
-                            print(appleIDCredential)
-                            // User ID
-                            let userID = appleIDCredential.user
-                            print("User ID: \(userID)")
-                            self.userID = userID
-                            authID = userID
+            //            if isLoggedIn {
+            //                ContentView()
+            //            } else {
+            SignInWithAppleButton(.signIn) { request in
+                request.requestedScopes = [.fullName, .email]
+            } onCompletion: { result in
+                switch result {
+                case .success(let authResults):
+                    print("Authorisation successful")
+                    if let appleIDCredential = authResults.credential as? ASAuthorizationAppleIDCredential {
+                        // Handle successful login here
+                        print(appleIDCredential)
+                        // User ID
+                        let userID = appleIDCredential.user
+                        print("User ID: \(userID)")
+                        self.userID = userID
+                        authID = userID
+                        
+                        // User's full name
+                        if let fullName = appleIDCredential.fullName {
+                            let firstName = fullName.givenName ?? ""
+                            let lastName = fullName.familyName ?? ""
+                            self.fullName = "\(firstName) \(lastName)"
                             
-                            // User's full name
-                            if let fullName = appleIDCredential.fullName {
-                                let firstName = fullName.givenName ?? ""
-                                let lastName = fullName.familyName ?? ""
-                                self.fullName = "\(firstName) \(lastName)"
-                                
-                                print(fullName)
-                            }
-                            
-                            // User's email
-                            let userEmail = appleIDCredential.email ?? ""
-                            self.userEmail = userEmail
-                            print(userEmail)
-                            
-                            isLoggedIn = true
-                            
-                            //                            print(" \(self.userEmail) and name : \(fullName)")
-                            
+                            print(fullName)
                         }
-                    case .failure(let error):
-                        print("Authorisation failed: \(error.localizedDescription)")
+                        
+                        // User's email
+                        let userEmail = appleIDCredential.email ?? ""
+                        self.userEmail = userEmail
+                        print(userEmail)
+                        
+                        isLoggedIn = true
+                        ContentView()
+                        
+                        //                            print(" \(self.userEmail) and name : \(fullName)")
+                        
                     }
+                case .failure(let error):
+                    print("Authorisation failed: \(error.localizedDescription)")
                 }
-                .signInWithAppleButtonStyle(.whiteOutline)
-                .frame(width: 200, height: 50)
-            }            
+            }
+            .signInWithAppleButtonStyle(.whiteOutline)
+            .frame(width: 200, height: 50)
+            //            }
             Text(userID)
         }
         .padding()

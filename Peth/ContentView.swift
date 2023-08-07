@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct TimelineView: View {
     @State var isShowingProfileModal : Bool = false
     @State var isShowingEditorModal: Bool = false
-    @State var isShowingInputUsernameModal: Bool = false
+    @Binding var isShowingInputUsernameModal: Bool
     
     @AppStorage("authID") var authID: String = ""
     @AppStorage("username") var username: String = ""
@@ -61,13 +61,12 @@ struct ContentView: View {
                     .interactiveDismissDisabled()
                 
             }
-            .onAppear(){
-                if (username == "") {
-                    isShowingInputUsernameModal = true
-                }
-            }
-
         }
+//        .onAppear{
+//            if (username == "") {
+//                isShowingInputUsernameModal = true
+//            }
+//        }
         
     }
     // Function to clear user data on logout
@@ -80,6 +79,22 @@ struct ContentView: View {
         username = ""
         LoginView()
     }
+}
+
+struct ContentView : View {
+    @State var isShowingInputUsernameModal: Bool = false
+    @AppStorage("username") var username: String = ""
+    
+    var body: some View {
+        TimelineView(isShowingInputUsernameModal: $isShowingInputUsernameModal)
+            .onAppear{
+                print(username)
+                if (username == "") {
+                    isShowingInputUsernameModal = true
+                }
+            }
+    }
+    
 }
 
 

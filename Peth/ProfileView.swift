@@ -11,7 +11,7 @@ struct ProfileView: View {
     @AppStorage("username") var username: String = ""
     @AppStorage("authID") var authID: String = ""
     @AppStorage("isLoggedIn") var isLoggedIn: Bool = true
-
+    
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -25,19 +25,20 @@ struct ProfileView: View {
                     Text("Logout")
                         .font(.body)
                         .foregroundColor(.red)
-                        .onTapGesture{
-                            // Clear user-related data from UserDefaults or any other storage
-                            UserDefaults.standard.removeObject(forKey: "userFullName")
-                            UserDefaults.standard.removeObject(forKey: "userEmail")
-                            
-                            authID = ""
-                            username = ""
-                            isLoggedIn = false
-                            dismiss()
-                            LoginView()
-                            
-                        }
                 }
+                .onTapGesture{
+                    // Clear user-related data from UserDefaults or any other storage
+                    UserDefaults.standard.removeObject(forKey: "userFullName")
+                    UserDefaults.standard.removeObject(forKey: "userEmail")
+                    
+                    authID = ""
+                    username = ""
+                    isLoggedIn = false
+                    dismiss()
+                    LoginView()
+                    
+                }
+                
             }
             .navigationBarTitle("Account", displayMode: .inline)
             .toolbar{
