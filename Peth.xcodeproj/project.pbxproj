@@ -12,6 +12,9 @@
 		DD430AD02A7FAB98003A3B9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD430ACF2A7FAB98003A3B9C /* Assets.xcassets */; };
 		DD430AD32A7FAB98003A3B9C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD430AD22A7FAB98003A3B9C /* Preview Assets.xcassets */; };
 		DD430ADB2A7FE2BB003A3B9C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD430ADA2A7FE2BB003A3B9C /* LoginView.swift */; };
+		DD430ADD2A806B3C003A3B9C /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD430ADC2A806B3C003A3B9C /* TextView.swift */; };
+		DD430AE02A806D5C003A3B9C /* RichTextKit in Frameworks */ = {isa = PBXBuildFile; productRef = DD430ADF2A806D5C003A3B9C /* RichTextKit */; };
+		DD430AE22A808612003A3B9C /* InputUsernameModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD430AE12A808612003A3B9C /* InputUsernameModal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,8 @@
 		DD430AD22A7FAB98003A3B9C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DD430AD92A7FAC56003A3B9C /* Peth.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Peth.entitlements; sourceTree = "<group>"; };
 		DD430ADA2A7FE2BB003A3B9C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		DD430ADC2A806B3C003A3B9C /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		DD430AE12A808612003A3B9C /* InputUsernameModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputUsernameModal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD430AE02A806D5C003A3B9C /* RichTextKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +64,8 @@
 				DD430ACB2A7FAB96003A3B9C /* PethApp.swift */,
 				DD430ADA2A7FE2BB003A3B9C /* LoginView.swift */,
 				DD430ACD2A7FAB96003A3B9C /* ContentView.swift */,
+				DD430AE12A808612003A3B9C /* InputUsernameModal.swift */,
+				DD430ADC2A806B3C003A3B9C /* TextView.swift */,
 				DD430ACF2A7FAB98003A3B9C /* Assets.xcassets */,
 				DD430AD12A7FAB98003A3B9C /* Preview Content */,
 			);
@@ -88,6 +96,9 @@
 			dependencies = (
 			);
 			name = Peth;
+			packageProductDependencies = (
+				DD430ADF2A806D5C003A3B9C /* RichTextKit */,
+			);
 			productName = Peth;
 			productReference = DD430AC82A7FAB96003A3B9C /* Peth.app */;
 			productType = "com.apple.product-type.application";
@@ -116,6 +127,9 @@
 				Base,
 			);
 			mainGroup = DD430ABF2A7FAB96003A3B9C;
+			packageReferences = (
+				DD430ADE2A806D5C003A3B9C /* XCRemoteSwiftPackageReference "RichTextKit" */,
+			);
 			productRefGroup = DD430AC92A7FAB96003A3B9C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -143,6 +157,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD430ADB2A7FE2BB003A3B9C /* LoginView.swift in Sources */,
+				DD430ADD2A806B3C003A3B9C /* TextView.swift in Sources */,
+				DD430AE22A808612003A3B9C /* InputUsernameModal.swift in Sources */,
 				DD430ACE2A7FAB96003A3B9C /* ContentView.swift in Sources */,
 				DD430ACC2A7FAB96003A3B9C /* PethApp.swift in Sources */,
 			);
@@ -347,6 +363,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DD430ADE2A806D5C003A3B9C /* XCRemoteSwiftPackageReference "RichTextKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielsaidi/RichTextKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.7.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DD430ADF2A806D5C003A3B9C /* RichTextKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD430ADE2A806D5C003A3B9C /* XCRemoteSwiftPackageReference "RichTextKit" */;
+			productName = RichTextKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DD430AC02A7FAB96003A3B9C /* Project object */;
 }

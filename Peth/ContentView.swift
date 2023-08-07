@@ -9,42 +9,86 @@ import SwiftUI
 
 struct ContentView: View {
     @State var isShowingProfileModal : Bool = false
+    @State var isShowingEditorModal: Bool = false
+    @State var isShowingInputUsernameModal: Bool = false
+    
     @AppStorage("authID") var authID: String = ""
+    @AppStorage("username") var username: String = ""
     
     var body: some View {
         NavigationView{
-            ScrollView {
-                LazyVStack {
-                    ForEach(0...300, id: \.self) { _ in
-                        Text("oke")
+//            ScrollView{
+//                LazyVStack{
+            List{
+                ForEach(1...100,  id: \.self) {_ in
+                    //                    NavigationLink {
+                    //                        Text("oke")
+                    //                    } label: {
+                    //                        Image(systemName: "square.and.pencil.circle.fill")
+                    //                            .resizable()
+                    //                            .scaledToFill()
+                    //                            .frame(width: 40, height: 25)
+                    //                            .clipShape(
+                    //                                RoundedRectangle(cornerRadius: 5)
+                    //                            )
+                    //                            .overlay(
+                    //                                RoundedRectangle(cornerRadius: 5)
+                    //                                    .stroke(.black, lineWidth: 1)
+                    //                            )
+                    
+                    VStack(alignment: .leading) {
+                        Text(username)
+                            .font(.headline)
+                        Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum")
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.leading)
                     }
                 }
+                        //                    }
+//                    }
+//                    .padding()
+//                }
             }
             .navigationTitle("Peth's Timeline")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    HStack {
-                        Image(systemName: "person.crop.circle")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        HStack {
+                            Image(systemName: "person.crop.circle")
+                                .onTapGesture {
+                                    isShowingProfileModal = true
+                                }
+                            //                            .resizable()
+                            //                            .frame(width: 24, height: 24)
+                        }
+                    }
+                    ToolbarItem(placement: .bottomBar) {
+                        Image(systemName: "square.and.pencil")
+                            .padding(.trailing)
                             .onTapGesture {
-                                isShowingProfileModal = true
+                                isShowingEditorModal = true
                             }
-                        //                            .resizable()
-                        //                            .frame(width: 24, height: 24)
+                        
+                    }
+                    
+                }
+                .onAppear(){
+                    if (username == "") {
+                        isShowingInputUsernameModal = true
                     }
                 }
-                ToolbarItem(placement: .bottomBar) {
-                    Image(systemName: "pencil.circle.fill")
-                        .padding(.trailing)
-                        .onTapGesture {
-                            isShowingProfileModal = true
-                        }
+                .sheet(isPresented: $isShowingProfileModal) {
+                    LogoutButton(isLoggedIn: $isShowingProfileModal, logoutAction: clearUserData)
+                }
+                .sheet(isPresented: $isShowingEditorModal) {
+                    TextView()
+                }
+                .sheet(isPresented: $isShowingInputUsernameModal) {
+                    InputUsernameModal()
+                        .presentationDetents([.height(UIScreen.main.bounds.size.height / 2) , .medium, .large])
+                        .presentationDragIndicator(.automatic)
+                        .interactiveDismissDisabled()
 
                 }
-      
-            }
-            .sheet(isPresented: $isShowingProfileModal) {
-                LogoutButton(isLoggedIn: $isShowingProfileModal, logoutAction: clearUserData)
-            }
         }
         
     }
@@ -55,6 +99,7 @@ struct ContentView: View {
         UserDefaults.standard.removeObject(forKey: "userEmail")
         
         authID = ""
+        username = ""
         LoginView()
     }
 }
