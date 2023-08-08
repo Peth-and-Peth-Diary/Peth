@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @AppStorage("username") var username: String = ""
+    @AppStorage("username") var username: String = AuthData.username
+    
     @AppStorage("authID") var authID: String = ""
     @AppStorage("isLoggedIn") var isLoggedIn: Bool = true
     
@@ -21,7 +22,7 @@ struct ProfileView: View {
                     Text(username)
                         .font(.body)
                 }
-                VStack{
+                HStack{
                     Text("Logout")
                         .font(.body)
                         .foregroundColor(.red)
@@ -32,7 +33,7 @@ struct ProfileView: View {
                     UserDefaults.standard.removeObject(forKey: "userEmail")
                     
                     authID = ""
-                    username = ""
+//                    username = ""
                     isLoggedIn = false
                     dismiss()
                     LoginView()

@@ -11,7 +11,8 @@ struct InputUsernameModal: View {
     @Environment(\.dismiss) var dismiss
     @State var usernameInput: String = ""
     
-    @AppStorage("username") var username: String = ""
+    @AppStorage("authID") var authID: String = ""
+    @AppStorage("username") var username: String = AuthData.username
     
     var body: some View {
         NavigationStack {
@@ -24,6 +25,9 @@ struct InputUsernameModal: View {
                 Button(
                     action: {
                         username = usernameInput
+                        Task{
+                            await storeAuth(authID: authID, username: username)
+                        }
                         dismiss()
                     }
                 ) {
@@ -42,6 +46,10 @@ struct InputUsernameModal: View {
                     Button(
                         action: {
                             username = usernameInput
+//                            AuthData.setValue(username)
+                            Task{
+                                await storeAuth(authID: authID, username: usernameInput)
+                            }
                             dismiss()
                         }
                     ) {

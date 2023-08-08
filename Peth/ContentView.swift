@@ -15,14 +15,16 @@ struct TimelineView: View {
     @AppStorage("authID") var authID: String = ""
     @AppStorage("username") var username: String = ""
     
+    @State var posts : [Posts] = []
+    
     var body: some View {
         NavigationView{
             List{
-                ForEach(1...100,  id: \.self) {_ in
+                ForEach(posts,  id: \.id) { post in
                     VStack(alignment: .leading) {
-                        Text(username)
+                        Text(post.username)
                             .font(.headline)
-                        Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum")
+                        Text(post.post)
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.leading)
                     }
@@ -51,34 +53,39 @@ struct TimelineView: View {
             .sheet(isPresented: $isShowingProfileModal) {
                 ProfileView()
             }
-            .sheet(isPresented: $isShowingEditorModal) {
+            .sheet(isPresented: $isShowingEditorModal, onDismiss: {
+                fetchPosts()
+                // code to execute when sheet dismiss
+            }, content: {
                 TextView()
-            }
-            .sheet(isPresented: $isShowingInputUsernameModal) {
+            })
+            .sheet(isPresented: $isShowingInputUsernameModal, onDismiss: {
+                fetchPosts()
+            }, content: {
                 InputUsernameModal()
                     .presentationDetents([.height(UIScreen.main.bounds.size.height / 2) , .medium, .large])
                     .presentationDragIndicator(.automatic)
                     .interactiveDismissDisabled()
                 
+            })
+            
+        }
+        .onAppear{
+            fetchPosts()
+        }
+    }
+    
+    func fetchPosts() {
+        getPosts{ result in
+            switch result {
+            case .success(let post):
+                posts = post
+            case .failure(let error):
+                print(error)
             }
         }
-//        .onAppear{
-//            if (username == "") {
-//                isShowingInputUsernameModal = true
-//            }
-//        }
-        
     }
-    // Function to clear user data on logout
-    func clearUserData() {
-        // Clear user-related data from UserDefaults or any other storage
-        UserDefaults.standard.removeObject(forKey: "userFullName")
-        UserDefaults.standard.removeObject(forKey: "userEmail")
-        
-        authID = ""
-        username = ""
-        LoginView()
-    }
+    
 }
 
 struct ContentView : View {
@@ -88,7 +95,8 @@ struct ContentView : View {
     var body: some View {
         TimelineView(isShowingInputUsernameModal: $isShowingInputUsernameModal)
             .onAppear{
-                print(username)
+                print("real value: \(username)")
+                print(username == "")
                 if (username == "") {
                     isShowingInputUsernameModal = true
                 }

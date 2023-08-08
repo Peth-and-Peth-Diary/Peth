@@ -16,6 +16,7 @@ struct TextView: View {
     @StateObject
     var context = RichTextContext()
     @Environment(\.dismiss) var dismiss
+    @AppStorage("authID") var authID: String = ""
     
     var body: some View {
         NavigationView{
@@ -48,6 +49,9 @@ struct TextView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action:{
+                        Task{
+                            await storePost(authID: authID, post: text)
+                        }
                         dismiss()
                     }){
                         Text("Post")
