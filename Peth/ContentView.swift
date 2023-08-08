@@ -22,12 +22,18 @@ struct TimelineView: View {
             List{
                 ForEach(posts,  id: \.id) { post in
                     VStack(alignment: .leading) {
-                        Text(post.username)
-                            .font(.headline)
+                        HStack{
+                            Text(post.username)
+                                .font(.headline)
+                            Spacer()
+                            Text(post.updated_at)
+                                .font(.caption2)
+                        }
                         Text(post.post)
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.leading)
                     }
+                    .padding()
                 }
             }
             .navigationTitle("Peth's Timeline")
@@ -68,6 +74,9 @@ struct TimelineView: View {
                     .interactiveDismissDisabled()
                 
             })
+            .refreshable {
+                fetchPosts()
+            }
             
         }
         .onAppear{

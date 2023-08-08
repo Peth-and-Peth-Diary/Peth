@@ -19,7 +19,7 @@ enum AuthData {
 
 func storeAuth(authID: String, username: String) async
 {
-    let url = URL(string: "http://192.168.18.58:8000/api/pengguna")!
+    let url = URL(string: "https://peth.masbek.my.id/api/pengguna")!
 //    let interests = interests
     let authData = ["auth_id": authID, "username": username]
     let bodyData = try! JSONEncoder().encode(authData)

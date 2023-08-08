@@ -12,6 +12,7 @@ struct Posts: Codable {
     let id: Int
     let username: String
     let post: String
+    let updated_at : String
 }
 
 struct PostsResponse: Codable {
@@ -21,7 +22,7 @@ struct PostsResponse: Codable {
 }
 
 func getPosts(completion: @escaping (Result<[Posts], Error>) -> Void) {
-    let url = URL(string: "http://192.168.18.58:8000/api/post")!
+    let url = URL(string: "https://peth.masbek.my.id/api/post")!
     
     var request = URLRequest(url: url)
     request.httpMethod = "GET"
@@ -52,7 +53,7 @@ func getPosts(completion: @escaping (Result<[Posts], Error>) -> Void) {
 
 func storePost(authID: String, post: NSAttributedString) async
 {
-    let url = URL(string: "http://192.168.18.58:8000/api/post")!
+    let url = URL(string: "https://peth.masbek.my.id/api/post")!
     
     // Create the request
     var request = URLRequest(url: url)
