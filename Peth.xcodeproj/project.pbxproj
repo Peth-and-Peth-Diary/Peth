@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DD2F130C2A81B24600B7C3C4 /* StoreAuthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F130B2A81B24600B7C3C4 /* StoreAuthData.swift */; };
+		DD2F130C2A81B24600B7C3C4 /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F130B2A81B24600B7C3C4 /* AuthController.swift */; };
 		DD2F130E2A81C0EF00B7C3C4 /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F130D2A81C0EF00B7C3C4 /* PostController.swift */; };
 		DD430ACC2A7FAB96003A3B9C /* PethApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD430ACB2A7FAB96003A3B9C /* PethApp.swift */; };
 		DD430ACE2A7FAB96003A3B9C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD430ACD2A7FAB96003A3B9C /* ContentView.swift */; };
@@ -18,10 +18,15 @@
 		DD430AE02A806D5C003A3B9C /* RichTextKit in Frameworks */ = {isa = PBXBuildFile; productRef = DD430ADF2A806D5C003A3B9C /* RichTextKit */; };
 		DD430AE22A808612003A3B9C /* InputUsernameModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD430AE12A808612003A3B9C /* InputUsernameModal.swift */; };
 		DD430AE42A80A7D3003A3B9C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD430AE32A80A7D3003A3B9C /* ProfileView.swift */; };
+		DDC164F92A83856B00E862AE /* KeychainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC164F82A83856B00E862AE /* KeychainItem.swift */; };
+		DDDDE7072A9325AB00519598 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDDDE7062A9325AB00519598 /* StoreKit.framework */; };
+		DDDDE7092A9325E700519598 /* Peth.storekit in Resources */ = {isa = PBXBuildFile; fileRef = DDDDE7082A9325E700519598 /* Peth.storekit */; };
+		DDDDE70B2A9327A000519598 /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDDE70A2A9327A000519598 /* StoreView.swift */; };
+		DDDDE70D2A9327C300519598 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDDE70C2A9327C300519598 /* Store.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		DD2F130B2A81B24600B7C3C4 /* StoreAuthData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreAuthData.swift; sourceTree = "<group>"; };
+		DD2F130B2A81B24600B7C3C4 /* AuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
 		DD2F130D2A81C0EF00B7C3C4 /* PostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
 		DD430AC82A7FAB96003A3B9C /* Peth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD430ACB2A7FAB96003A3B9C /* PethApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PethApp.swift; sourceTree = "<group>"; };
@@ -33,6 +38,11 @@
 		DD430ADC2A806B3C003A3B9C /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		DD430AE12A808612003A3B9C /* InputUsernameModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputUsernameModal.swift; sourceTree = "<group>"; };
 		DD430AE32A80A7D3003A3B9C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		DDC164F82A83856B00E862AE /* KeychainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainItem.swift; sourceTree = "<group>"; };
+		DDDDE7062A9325AB00519598 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		DDDDE7082A9325E700519598 /* Peth.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Peth.storekit; sourceTree = "<group>"; };
+		DDDDE70A2A9327A000519598 /* StoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
+		DDDDE70C2A9327C300519598 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +51,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD430AE02A806D5C003A3B9C /* RichTextKit in Frameworks */,
+				DDDDE7072A9325AB00519598 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,8 +61,11 @@
 		DD2F130A2A81B21B00B7C3C4 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				DD2F130B2A81B24600B7C3C4 /* StoreAuthData.swift */,
+				DD2F130B2A81B24600B7C3C4 /* AuthController.swift */,
 				DD2F130D2A81C0EF00B7C3C4 /* PostController.swift */,
+				DDC164F82A83856B00E862AE /* KeychainItem.swift */,
+				DDDDE7082A9325E700519598 /* Peth.storekit */,
+				DDDDE70C2A9327C300519598 /* Store.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -61,6 +75,7 @@
 			children = (
 				DD430ACA2A7FAB96003A3B9C /* Peth */,
 				DD430AC92A7FAB96003A3B9C /* Products */,
+				DDDDE7052A9325AB00519598 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -85,6 +100,7 @@
 				DD430ADC2A806B3C003A3B9C /* TextView.swift */,
 				DD430ACF2A7FAB98003A3B9C /* Assets.xcassets */,
 				DD430AD12A7FAB98003A3B9C /* Preview Content */,
+				DDDDE70A2A9327A000519598 /* StoreView.swift */,
 			);
 			path = Peth;
 			sourceTree = "<group>";
@@ -95,6 +111,14 @@
 				DD430AD22A7FAB98003A3B9C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		DDDDE7052A9325AB00519598 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DDDDE7062A9325AB00519598 /* StoreKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,6 +185,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDDDE7092A9325E700519598 /* Peth.storekit in Resources */,
 				DD430AD32A7FAB98003A3B9C /* Preview Assets.xcassets in Resources */,
 				DD430AD02A7FAB98003A3B9C /* Assets.xcassets in Resources */,
 			);
@@ -176,11 +201,14 @@
 				DD430ADB2A7FE2BB003A3B9C /* LoginView.swift in Sources */,
 				DD2F130E2A81C0EF00B7C3C4 /* PostController.swift in Sources */,
 				DD430ADD2A806B3C003A3B9C /* TextView.swift in Sources */,
-				DD2F130C2A81B24600B7C3C4 /* StoreAuthData.swift in Sources */,
+				DD2F130C2A81B24600B7C3C4 /* AuthController.swift in Sources */,
 				DD430AE22A808612003A3B9C /* InputUsernameModal.swift in Sources */,
 				DD430ACE2A7FAB96003A3B9C /* ContentView.swift in Sources */,
+				DDDDE70D2A9327C300519598 /* Store.swift in Sources */,
 				DD430AE42A80A7D3003A3B9C /* ProfileView.swift in Sources */,
 				DD430ACC2A7FAB96003A3B9C /* PethApp.swift in Sources */,
+				DDDDE70B2A9327A000519598 /* StoreView.swift in Sources */,
+				DDC164F92A83856B00E862AE /* KeychainItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

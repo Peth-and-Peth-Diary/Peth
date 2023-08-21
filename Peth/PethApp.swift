@@ -14,12 +14,13 @@ struct PethApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if (isLoggedIn) {
-                ContentView()
-            }
-            else {
-                LoginView()
-            }
+            ContentView()
+//            if (isLoggedIn) {
+//                ContentView()
+//            }
+//            else {
+//                LoginView()
+//            }
         }
     }
 }

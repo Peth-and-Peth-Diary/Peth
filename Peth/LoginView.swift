@@ -49,7 +49,25 @@ struct LoginView: View {
                         let userEmail = appleIDCredential.email ?? ""
                         self.userEmail = userEmail
                         print(userEmail)
-                        
+                        getCredentialState(forUserID: userID) { credentialState, error in
+                            if let error = error {
+                                print("Error: \(error)")
+                            } else {
+                                switch credentialState {
+                                case .authorized:
+                                    print("User is authorized.")
+                                case .revoked:
+                                    print("User's credential has been revoked.")
+                                case .notFound:
+                                    print("User's credential not found.")
+                                case .transferred:
+                                    print("user's transferred")
+                                @unknown default:
+                                    print("Unknown credential state.")
+                                }
+                            }
+                        }
+
                         isLoggedIn = true
                         ContentView()
                         
@@ -68,6 +86,17 @@ struct LoginView: View {
         .padding()
     }
     
+    func getCredentialState(
+        forUserID userID: String,
+        completion: @escaping (ASAuthorizationAppleIDProvider.CredentialState, Error?) -> Void
+    ) {
+        // Example implementation
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        appleIDProvider.getCredentialState(forUserID: userID) { credentialState, error in
+            completion(credentialState, error)
+        }
+    }
+
     // Function to clear user data on logout
     func clearUserData() {
         // Clear user-related data from UserDefaults or any other storage

@@ -1,0 +1,33 @@
+{
+  "identifier" : "E78701EA",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "7FEE1635",
+      "localizations" : [
+        {
+          "description" : "",
+          "displayName" : "Unlimited Words",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "UnlimitedWords",
+      "referenceName" : "UnlimitedWords",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 2,
+    "minor" : 0
+  }
+}

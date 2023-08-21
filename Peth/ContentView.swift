@@ -19,64 +19,66 @@ struct TimelineView: View {
     
     var body: some View {
         NavigationView{
-            List{
+            ScrollView{
                 ForEach(posts,  id: \.id) { post in
-                    VStack(alignment: .leading) {
+                    LazyVStack(alignment: .leading) {
                         HStack{
                             Text(post.username)
                                 .font(.headline)
-                            Spacer()
+                            Text("·")
                             Text(post.updated_at)
                                 .font(.caption2)
+                                .foregroundColor(.secondary)
                         }
                         Text(post.post)
+                            .font(.subheadline)
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.leading)
+                        Divider()
                     }
                     .padding()
                 }
-            }
-            .navigationTitle("Peth's Timeline")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    HStack {
-                        Image(systemName: "person.crop.circle")
-                            .onTapGesture {
-                                isShowingProfileModal = true
-                            }
-                    }
-                }
-                ToolbarItem(placement: .bottomBar) {
-                    Image(systemName: "square.and.pencil")
-                        .padding(.trailing)
-                        .onTapGesture {
-                            isShowingEditorModal = true
+            }            .navigationTitle("Peth's Timeline")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        HStack {
+                            Image(systemName: "person.crop.circle")
+                                .onTapGesture {
+                                    isShowingProfileModal = true
+                                }
                         }
+                    }
+                    ToolbarItem(placement: .bottomBar) {
+                        Image(systemName: "square.and.pencil")
+                            .padding(.trailing)
+                            .onTapGesture {
+                                isShowingEditorModal = true
+                            }
+                        
+                    }
                     
                 }
-                
-            }
-            .sheet(isPresented: $isShowingProfileModal) {
-                ProfileView()
-            }
-            .sheet(isPresented: $isShowingEditorModal, onDismiss: {
-                fetchPosts()
-                // code to execute when sheet dismiss
-            }, content: {
-                TextView()
-            })
-            .sheet(isPresented: $isShowingInputUsernameModal, onDismiss: {
-                fetchPosts()
-            }, content: {
-                InputUsernameModal()
-                    .presentationDetents([.height(UIScreen.main.bounds.size.height / 2) , .medium, .large])
-                    .presentationDragIndicator(.automatic)
-                    .interactiveDismissDisabled()
-                
-            })
-            .refreshable {
-                fetchPosts()
-            }
+                .sheet(isPresented: $isShowingProfileModal) {
+                    ProfileView()
+                }
+                .sheet(isPresented: $isShowingEditorModal, onDismiss: {
+                    fetchPosts()
+                    // code to execute when sheet dismiss
+                }, content: {
+                    TextView()
+                })
+                .sheet(isPresented: $isShowingInputUsernameModal, onDismiss: {
+                    fetchPosts()
+                }, content: {
+                    InputUsernameModal()
+                        .presentationDetents([.height(UIScreen.main.bounds.size.height / 2) , .medium, .large])
+                        .presentationDragIndicator(.automatic)
+                        .interactiveDismissDisabled()
+                    
+                })
+                .refreshable {
+                    fetchPosts()
+                }
             
         }
         .onAppear{
