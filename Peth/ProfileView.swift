@@ -86,10 +86,11 @@ struct ProfileView: View {
                                         do {
                                             if let purchaseResult = try await store.purchase(product) {
                                                 print(purchaseResult)
+                                                showingAlert = true
                                                 // Handle the purchase result, which might not be nil
                                                 // For example, you might want to show a success message or update UI
                                             } else {
-                                                showingAlert = true
+                                                // If Else, there might not yet purchase, user just click the button but dont real purchase
                                             }
                                         } catch {
                                             // Handle any errors that might occur during the purchase process
