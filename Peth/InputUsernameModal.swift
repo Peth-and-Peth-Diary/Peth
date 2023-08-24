@@ -40,7 +40,7 @@ struct InputUsernameModal: View {
                 .padding(.horizontal, 14)
             }
             .padding(.horizontal)
-            .navigationBarTitle("Trip", displayMode: .inline)
+            .navigationBarTitle("Username", displayMode: .inline)
             .toolbar{
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(
@@ -54,16 +54,15 @@ struct InputUsernameModal: View {
                         }
                     ) {
                         Text("Done")
-                            .foregroundColor(Color.accentColor)
-                        
-                            .padding(.horizontal)
+                            .fontWeight(.bold)
+//                            .padding(.horizontal)
                     }
                     .disabled(usernameInput == "")
                 }
                 
             }
-            .toolbarBackground(Color(UIColor.systemGray6), for: .navigationBar)
-            .toolbarBackground(.visible, for: .navigationBar)
+//            .toolbarBackground(Color(UIColor.systemGray6), for: .navigationBar)
+//            .toolbarBackground(.visible, for: .navigationBar)
             
         }
     }

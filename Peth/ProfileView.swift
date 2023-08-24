@@ -10,6 +10,8 @@ import SwiftUI
 struct ProfileView: View {
     @AppStorage("username") var username: String = AuthData.username
     
+    @State var usernameInput: String = ""
+    
     @AppStorage("authID") var authID: String = ""
     @AppStorage("isLoggedIn") var isLoggedIn: Bool = true
     
@@ -22,8 +24,32 @@ struct ProfileView: View {
             NavigationStack{
                 List{
                     VStack{
-                        Text(username)
-                            .font(.body)
+                        NavigationLink {
+                            Form{
+                                TextField("Username", text: $username)
+                                
+                                Section {
+                                    Button(
+                                        action: {
+                                            print(username)
+//                                            username = usernameInput
+                                            Task{
+                                                await storeAuth(authID: authID, username: username)
+                                            }
+                                            dismiss()
+                                            
+                                        }
+                                    ) {
+                                        Text("Save")
+                                    }
+                                    .foregroundColor(.blue)
+                                }
+                            }
+                        } label: {
+                            Text(username)
+                                .font(.body)
+                            
+                        }
                     }
                     HStack{
                         Text("Logout")
@@ -45,7 +71,7 @@ struct ProfileView: View {
                         LoginView()
                         
                     }
-                    Section(header: Text("To buy")) {
+                    Section {
                         ForEach(store.products, id: \.id) {
                             product in
                             HStack {
@@ -74,14 +100,14 @@ struct ProfileView: View {
                             }
                         ) {
                             Text("Done")
-                                .foregroundColor(Color.accentColor)
-                                .padding(.horizontal)
+                                .fontWeight(.bold)
+                            //                                .padding()
                         }
                     }
                     
                 }
-                .toolbarBackground(Color(UIColor.systemGray6), for: .navigationBar)
-                .toolbarBackground(.visible, for: .navigationBar)
+                //                .toolbarBackground(Color(UIColor.systemGray6), for: .navigationBar)
+                //                .toolbarBackground(.visible, for: .navigationBar)
             }
         }else {
             LoginView()

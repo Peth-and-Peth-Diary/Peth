@@ -10,9 +10,14 @@
       "internalID" : "7FEE1635",
       "localizations" : [
         {
-          "description" : "",
+          "description" : "Unlimitedly pour out all of your though",
           "displayName" : "Unlimited Words",
           "locale" : "en_US"
+        },
+        {
+          "description" : "Tuangkan semua pikiran Anda tanpa batas kata",
+          "displayName" : "Kata Tidak Terbatas",
+          "locale" : "id"
         }
       ],
       "productID" : "UnlimitedWords",

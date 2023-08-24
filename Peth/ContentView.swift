@@ -12,6 +12,8 @@ struct TimelineView: View {
     @State var isShowingEditorModal: Bool = false
     @Binding var isShowingInputUsernameModal: Bool
     
+    @State var searchQuery = ""
+    
     @AppStorage("authID") var authID: String = ""
     @AppStorage("username") var username: String = ""
     
@@ -20,7 +22,7 @@ struct TimelineView: View {
     var body: some View {
         NavigationView{
             ScrollView{
-                ForEach(posts,  id: \.id) { post in
+                ForEach(filteredPost,  id: \.id) { post in
                     LazyVStack(alignment: .leading) {
                         HStack{
                             Text(post.username)
@@ -38,47 +40,61 @@ struct TimelineView: View {
                     }
                     .padding()
                 }
-            }            .navigationTitle("Peth's Timeline")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        HStack {
-                            Image(systemName: "person.crop.circle")
-                                .onTapGesture {
-                                    isShowingProfileModal = true
-                                }
-                        }
-                    }
-                    ToolbarItem(placement: .bottomBar) {
-                        Image(systemName: "square.and.pencil")
-                            .padding(.trailing)
+            }
+            .navigationTitle("Peth's Timeline")
+            .searchable(text: $searchQuery, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Post") {        }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    HStack {
+                        Image(systemName: "person.crop.circle")
+//                            .imageScale(.large)
+//                            .resizable()
+                            .font(.system(size: 25))
                             .onTapGesture {
-                                isShowingEditorModal = true
+                                isShowingProfileModal = true
                             }
-                        
                     }
-                    
                 }
-                .sheet(isPresented: $isShowingProfileModal) {
-                    ProfileView()
+                ToolbarItem(placement: .bottomBar) {
+                    Image(systemName: "arrow.clockwise.circle")
+                        .padding(.trailing)
+                        .onTapGesture {
+                            fetchPosts()
+                        }
                 }
-                .sheet(isPresented: $isShowingEditorModal, onDismiss: {
-                    fetchPosts()
-                    // code to execute when sheet dismiss
-                }, content: {
-                    TextView()
-                })
-                .sheet(isPresented: $isShowingInputUsernameModal, onDismiss: {
-                    fetchPosts()
-                }, content: {
-                    InputUsernameModal()
-                        .presentationDetents([.height(UIScreen.main.bounds.size.height / 2) , .medium, .large])
-                        .presentationDragIndicator(.automatic)
-                        .interactiveDismissDisabled()
-                    
-                })
-                .refreshable {
-                    fetchPosts()
+                ToolbarItem(placement: .bottomBar) {
+                    Image(systemName: "square.and.pencil")
+                        .padding(.trailing)
+                        .onTapGesture {
+                            isShowingEditorModal = true
+                        }
                 }
+                
+                
+            }
+            .sheet(isPresented: $isShowingProfileModal, onDismiss: {
+                fetchPosts()
+            }, content: {
+                ProfileView()
+            })
+            .sheet(isPresented: $isShowingEditorModal, onDismiss: {
+                fetchPosts()
+                // code to execute when sheet dismiss
+            }, content: {
+                TextView()
+            })
+            .sheet(isPresented: $isShowingInputUsernameModal, onDismiss: {
+                fetchPosts()
+            }, content: {
+                InputUsernameModal()
+                    .presentationDetents([.height(UIScreen.main.bounds.size.height / 2) , .medium, .large])
+                    .presentationDragIndicator(.automatic)
+                    .interactiveDismissDisabled()
+                
+            })
+            .refreshable {
+                fetchPosts()
+            }
             
         }
         .onAppear{
@@ -96,6 +112,14 @@ struct TimelineView: View {
             }
         }
     }
+    
+    var filteredPost: [Posts] {
+        if searchQuery.isEmpty {
+            return posts
+        }else { return posts.filter { $0.post.lowercased().contains(searchQuery.lowercased()) }
+        }
+    }
+
     
 }
 
