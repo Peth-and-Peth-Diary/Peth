@@ -51,7 +51,7 @@ func getPosts(completion: @escaping (Result<[Posts], Error>) -> Void) {
 }
 
 
-func storePost(authID: String, post: NSAttributedString) async
+func storePost(authID: String, post: String) async
 {
     let url = URL(string: "https://peth.masbek.my.id/api/post")!
     
@@ -61,7 +61,7 @@ func storePost(authID: String, post: NSAttributedString) async
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
     
     // Create the data to send
-    let postData: [String: Any] = ["auth_id": authID, "post": post.string] // Convert NSAttributedString to plain string
+    let postData: [String: Any] = ["auth_id": authID, "post": post] // Convert NSAttributedString to plain string
     let jsonData = try! JSONSerialization.data(withJSONObject: postData)
     
     // Attach the data to the request

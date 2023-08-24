@@ -89,7 +89,7 @@ struct LoginView: View {
                         }
                         
                         isLoggedIn = true
-                        ContentView()
+//                        ContentView()
                         
                     }
                 case .failure(let error):

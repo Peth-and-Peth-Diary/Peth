@@ -15,6 +15,7 @@ struct ProfileView: View {
     
     @AppStorage("authID") var authID: String = ""
     @AppStorage("isLoggedIn") var isLoggedIn: Bool = false
+    @AppStorage("textLimit") var textLimit = 10
     
     @Environment(\.dismiss) var dismiss
     
@@ -87,6 +88,7 @@ struct ProfileView: View {
                                             if let purchaseResult = try await store.purchase(product) {
                                                 print(purchaseResult)
                                                 showingAlert = true
+                                                textLimit = Int.max
                                                 // Handle the purchase result, which might not be nil
                                                 // For example, you might want to show a success message or update UI
                                             } else {
