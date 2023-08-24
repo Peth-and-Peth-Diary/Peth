@@ -20,10 +20,12 @@ class Store: ObservableObject {
     var transacitonListener: Task<Void, Error>?
     
     init() {
-       transacitonListener = listenForTransactions()
-       Task {
-         await requestProducts()
-     }
+        transacitonListener = listenForTransactions()
+        Task {
+            await requestProducts()
+            // Must be called after the products are already fetched
+            await updateCurrentEntitlements()
+        }
     }
     
     // 6:
@@ -56,29 +58,35 @@ class Store: ObservableObject {
         }
     }
     
-    func listenForTransactions() -> Task < Void, Error > {
-     // 1:
-     return Task.detached {
-       // 2:
-       for await result in Transaction.updates {
-         switch result {
-           // 3:
-           case let.verified(transaction):
-             // 4:
-             guard
-             let product = self.products.first(where: {
-               $0.id == transaction.productID
-             })
-             else {
-               continue
-             }
-             self.purchasedNonConsumables.insert(product)
-             // 5:
-             await transaction.finish()
-           default:
-             continue
-         }
-       }
-     }
-   }
+    @MainActor
+    private func handle(transactionVerification result: VerificationResult <Transaction> ) async {
+        switch result {
+        case let.verified(transaction):
+            guard
+                let product = self.products.first(where: {
+                    $0.id == transaction.productID
+                })
+            else {
+                return
+            }
+            self.purchasedNonConsumables.insert(product)
+            await transaction.finish()
+        default:
+            return
+        }
+    }
+    
+    func listenForTransactions() -> Task<Void, Error> {
+        return Task.detached {
+            for await result in Transaction.updates {
+                await self.handle(transactionVerification: result)
+            }
+        }
+    }
+    
+    private func updateCurrentEntitlements() async {
+        for await result in Transaction.currentEntitlements {
+            await self.handle(transactionVerification: result)
+        }
+    }
 }

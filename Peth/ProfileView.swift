@@ -11,6 +11,7 @@ struct ProfileView: View {
     @AppStorage("username") var username: String = AuthData.username
     
     @State var usernameInput: String = ""
+    @State private var showingAlert: Bool = false
     
     @AppStorage("authID") var authID: String = ""
     @AppStorage("isLoggedIn") var isLoggedIn: Bool = true
@@ -32,7 +33,7 @@ struct ProfileView: View {
                                     Button(
                                         action: {
                                             print(username)
-//                                            username = usernameInput
+                                            //                                            username = usernameInput
                                             Task{
                                                 await storeAuth(authID: authID, username: username)
                                             }
@@ -82,14 +83,24 @@ struct ProfileView: View {
                                 // 3:
                                 Button("\(product.displayPrice)") {
                                     Task {
-                                        try await store.purchase(product)
+                                        do {
+                                            if let purchaseResult = try await store.purchase(product) {
+                                                print(purchaseResult)
+                                                // Handle the purchase result, which might not be nil
+                                                // For example, you might want to show a success message or update UI
+                                            } else {
+                                                showingAlert = true
+                                            }
+                                        } catch {
+                                            // Handle any errors that might occur during the purchase process
+                                            // For example, you can show an error message to the user
+                                            print("Purchase error: \(error)")
+                                        }
                                     }
                                 }
                             }
                         }
                     }
-                    
-                    
                 }
                 .navigationBarTitle("Account", displayMode: .inline)
                 .toolbar{
@@ -101,13 +112,14 @@ struct ProfileView: View {
                         ) {
                             Text("Done")
                                 .fontWeight(.bold)
-                            //                                .padding()
                         }
                     }
-                    
                 }
-                //                .toolbarBackground(Color(UIColor.systemGray6), for: .navigationBar)
-                //                .toolbarBackground(.visible, for: .navigationBar)
+                .alert("You've Already Purchase Lifetime Subscription", isPresented: $showingAlert) {
+                    Button("OK", role: .cancel) { }
+                }
+                
+                
             }
         }else {
             LoginView()

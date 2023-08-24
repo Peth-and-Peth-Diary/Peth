@@ -129,13 +129,13 @@ struct ContentView : View {
     
     var body: some View {
         TimelineView(isShowingInputUsernameModal: $isShowingInputUsernameModal)
-            .onAppear{
-                print("real value: \(username)")
-                print(username == "")
-                if (username == "") {
-                    isShowingInputUsernameModal = true
-                }
-            }
+//            .onAppear{
+//                print("real value: \(username)")
+//                print(username == "")
+//                if (username == "") {
+//                    isShowingInputUsernameModal = true
+//                }
+//            }
     }
     
 }
