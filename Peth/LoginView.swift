@@ -11,16 +11,36 @@ import AuthenticationServices
 struct LoginView: View {
     @State private var fullName: String = ""
     @State private var userEmail: String = ""
+    @State private var isAnimating: Bool = true
     
     @AppStorage("isLoggedIn") var isLoggedIn: Bool = false
     @State var userID = ""
     @AppStorage("authID") var authID: String = ""
     
     var body: some View {
-        VStack {
-            //            if isLoggedIn {
-            //                ContentView()
-            //            } else {
+        VStack(alignment: .center) {
+            Text("Peth")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .padding()
+            Text("Your space to share thoughts, untethered by likes or comments. Here, your words take center stage, not the numbers. Join us and liberate your ideas")
+                .font(.subheadline)
+                .multilineTextAlignment(.center)
+                .padding(.bottom, 20)
+            
+            Text("Start With")
+                .font(.body)
+                .fontWeight(.bold)
+                .foregroundColor(isAnimating ? .red : .blue) // You can set the initial color here
+//                .animation(Animation.easeInOut(duration: 1).repeatForever())
+                .onAppear() {
+                    Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+                        withAnimation(.easeInOut(duration: 1)) {
+                            self.isAnimating.toggle()
+                        }
+                    }
+                }
+            
             SignInWithAppleButton(.signIn) { request in
                 request.requestedScopes = [.fullName, .email]
             } onCompletion: { result in
@@ -67,11 +87,9 @@ struct LoginView: View {
                                 }
                             }
                         }
-
+                        
                         isLoggedIn = true
                         ContentView()
-                        
-                        //                            print(" \(self.userEmail) and name : \(fullName)")
                         
                     }
                 case .failure(let error):
@@ -80,8 +98,6 @@ struct LoginView: View {
             }
             .signInWithAppleButtonStyle(.whiteOutline)
             .frame(width: 200, height: 50)
-            //            }
-            Text(userID)
         }
         .padding()
     }
@@ -96,7 +112,7 @@ struct LoginView: View {
             completion(credentialState, error)
         }
     }
-
+    
     // Function to clear user data on logout
     func clearUserData() {
         // Clear user-related data from UserDefaults or any other storage

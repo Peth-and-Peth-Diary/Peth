@@ -14,7 +14,7 @@ struct ProfileView: View {
     @State private var showingAlert: Bool = false
     
     @AppStorage("authID") var authID: String = ""
-    @AppStorage("isLoggedIn") var isLoggedIn: Bool = true
+    @AppStorage("isLoggedIn") var isLoggedIn: Bool = false
     
     @Environment(\.dismiss) var dismiss
     
